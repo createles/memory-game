@@ -1,9 +1,13 @@
 import { useState } from 'react'
+import BattleScreen from './components/BattleScreen/BattleScreen'
+import CardArea from './components/CardArea/CardArea'
 import './App.css'
 
 function App() {
   return (
-    <p>Are you memory ready?</p>
+    <BattleScreen
+    cardArea={<CardArea/>}
+    />
   )
 }
 
