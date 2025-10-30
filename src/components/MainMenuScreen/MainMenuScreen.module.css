@@ -1,0 +1,19 @@
+.main-menu {
+  width: 100svw;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: whitesmoke;
+}
+
+.main-title {
+  font-size: 5rem;
+}
+
+.game-modes {
+  display: flex;
+  gap: 1rem;
+}
