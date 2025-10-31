@@ -38,6 +38,8 @@ function App() {
     ),
     battle: (
       <BattleScreen
+        difficulty={difficulty}
+        onReturnToMenu={returnToMenu}
       />
     ),
     gameover: (
