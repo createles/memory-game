@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import generateCards from "./Card/generateCards";
 
-function useBattleLogic(difficulty) {
+function useBattleLogic(difficulty, onCompletion, onGameOver) {
   const [cards, setCards] = useState([]);
   const [clickedCards, setClickedCards] = useState(new Set());
   
@@ -21,7 +21,13 @@ function useBattleLogic(difficulty) {
 
   useEffect(() => {
     console.log('Clicked cards updated: ', clickedCards);
-  }, [clickedCards]);
+
+    if (cards.length === 0 ) return;
+
+    if (clickedCards.size === cards.length) {
+      onCompletion();
+    }
+  }, [clickedCards, cards, onCompletion]);
   
   // game logic, behavior when card is clicked
   const handleCardClick = (cardId) => {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { use, useCallback, useState } from 'react'
 import BattleScreen from './components/BattleScreen/BattleScreen'
 import MainMenuScreen from './components/MainMenuScreen/MainMenu'
 import './App.css'
@@ -9,25 +9,25 @@ function App() {
   const [currentScreen, setCurrentScreen] = useState('menu');
   const [difficulty, setDifficulty] = useState('');
 
-  const startGame = () => {
+  const startGame = useCallback(() => {
     setCurrentScreen('battle');
     console.log('game started');
-  };
+  }, []);
 
-  const showGameOver = () => {
+  const showGameOver = useCallback(() => {
     setCurrentScreen('gameover');
     console.log("game over");
-  }
+  }, []);
 
-  const showCompletion = () => {
+  const showCompletion = useCallback(() => {
     setCurrentScreen('completion');
     console.log('you made it!');
-  }
+  }, []);
 
-  const returnToMenu = () => {
+  const returnToMenu = useCallback(() => {
     setCurrentScreen('menu');
     console.log('returning to main menu');
-  }
+  }, []);
 
   const screens = {
     menu: (
@@ -40,6 +40,8 @@ function App() {
       <BattleScreen
         difficulty={difficulty}
         onReturnToMenu={returnToMenu}
+        onCompletion={showCompletion}
+        onGameOver={showGameOver}
       />
     ),
     gameover: (

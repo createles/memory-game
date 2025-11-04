@@ -2,10 +2,10 @@ import styles from "./BattleScreen.module.css"
 import useBattleLogic from "./useBattleLogic";
 import Card from "./Card/Card";
 
-function BattleScreen({difficulty, onReturnToMenu}) {
+function BattleScreen({difficulty, onReturnToMenu, onCompletion, onGameOver}) {
 
   // useBattleLogic is called on mount, and passes difficulty
-  const { score, highScore, cards, handleCardClick } = useBattleLogic(difficulty);
+  const { score, highScore, cards, handleCardClick } = useBattleLogic(difficulty, onCompletion, onGameOver);
 
   return (
     <div className={styles['battle-screen']}>
