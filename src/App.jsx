@@ -1,4 +1,4 @@
-import { use, useCallback, useState } from 'react'
+import {useCallback, useState } from 'react'
 import BattleScreen from './components/BattleScreen/BattleScreen'
 import MainMenuScreen from './components/MainMenuScreen/MainMenu'
 import './App.css'
