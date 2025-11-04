@@ -1,5 +1,7 @@
+import { allCards } from "./cardData";
+import shuffleCards from "../shuffleCards";
+
 function generateCards(difficulty) {
-  const cards = [];
   let deckSize;
 
   switch (difficulty) {
@@ -16,11 +18,10 @@ function generateCards(difficulty) {
       deckSize = 6;
   }
 
-  for (let i = 0; i < deckSize; i++) {
-    cards.push({"id": crypto.randomUUID()})
-  }
+  const shuffledDeck = shuffleCards([...allCards]);
+  const newCards = shuffledDeck.slice(0, deckSize);
 
-  return cards;
+  return newCards;
 }
 
 export default generateCards;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import generateCards from "./Card/generateCards";
+import shuffleCards from "./shuffleCards";
 
 function useBattleLogic(difficulty, onCompletion, onGameOver) {
   const [cards, setCards] = useState([]);
@@ -39,6 +40,12 @@ function useBattleLogic(difficulty, onCompletion, onGameOver) {
       });
 
       setScore(prevScore => prevScore + 1);
+
+      setCards(prevCards => {
+        const newShuffledCards = shuffleCards([...prevCards]);
+
+        return newShuffledCards;
+      });
 
     } else {
       setScore(0);
