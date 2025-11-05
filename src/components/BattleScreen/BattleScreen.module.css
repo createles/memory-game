@@ -2,7 +2,14 @@
   position: relative;
   width: 100svw;
   height: 100svh;
-  background-color: rgb(162, 243, 223);
+  background-color: rgb(27, 11, 4);
+  overflow: hidden;
+}
+
+#back-button {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .card-area-container {
