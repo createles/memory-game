@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "./Card.module.css"
-import cardBack from "/src/assets/tarot-cards/card-back/cardBack.png"
+import cardBackBG from "/src/assets/black-gold-cards/card-back/cardBack.png"
+import cardBackPC from "/src/assets/purple-chrome-cards/cardBack/cardBack.png"
 
-function Card({id, name, img, handleCardClick, isFlipping, index}) {
+function Card({id, name, img, handleCardClick, isFlipping, index, theme}) {
   const [isDealt, setIsDealt] = useState(false);
+  const cardBack = theme === "blackGold" ? cardBackBG : cardBackPC;
 
   useEffect(() => {
     const timer = setTimeout(() => {

@@ -20,6 +20,7 @@ function BattleScreen({difficulty, onReturnToMenu, onCompletion, onGameOver, the
           handleCardClick={handleCardClick}
           isFlipping={isHandFlipping}
           index={index}
+          theme={theme}
           ></Card>
         ))}
       </div>
