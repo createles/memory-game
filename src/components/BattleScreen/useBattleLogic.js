@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import generateCards from "./Card/generateCards";
 import shuffleCards from "./shuffleCards";
 
-function useBattleLogic(difficulty, onCompletion, onGameOver) {
+function useBattleLogic(difficulty, onCompletion, onGameOver, theme) {
   const [cards, setCards] = useState([]);
   const [clickedCards, setClickedCards] = useState(new Set());
   
@@ -15,9 +15,9 @@ function useBattleLogic(difficulty, onCompletion, onGameOver) {
   // runs on mounting; cards generated based on difficulty selected,
   // changes as difficulty increases
   useEffect(() => {
-    const newCards = generateCards(difficulty);
+    const newCards = generateCards(difficulty, theme);
     setCards(newCards);
-  }, [difficulty]);
+  }, [difficulty, theme]);
 
   useEffect(() => {
     console.log('Score updated: ', score);

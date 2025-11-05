@@ -1,8 +1,9 @@
-import { allCards } from "./cardData";
+import allDecks from "./cardData";
 import shuffleCards from "../shuffleCards";
 
-function generateCards(difficulty) {
+function generateCards(difficulty, theme) {
   let deckSize;
+  let allCards = allDecks[theme];
 
   switch (difficulty) {
     case "easy":
