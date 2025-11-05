@@ -5,7 +5,7 @@ import Card from "./Card/Card";
 function BattleScreen({difficulty, onReturnToMenu, onCompletion, onGameOver}) {
 
   // useBattleLogic is called on mount, and passes difficulty
-  const { score, highScore, cards, handleCardClick } = useBattleLogic(difficulty, onCompletion, onGameOver);
+  const { score, highScore, cards, handleCardClick, isHandFlipping } = useBattleLogic(difficulty, onCompletion, onGameOver);
 
   return (
     <div className={styles['battle-screen']}>
@@ -18,6 +18,7 @@ function BattleScreen({difficulty, onReturnToMenu, onCompletion, onGameOver}) {
           name={card.name}
           img={card.img} 
           handleCardClick={handleCardClick}
+          isFlipping={isHandFlipping}
           ></Card>
         ))}
       </div>

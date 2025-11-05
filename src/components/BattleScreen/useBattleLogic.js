@@ -6,6 +6,9 @@ function useBattleLogic(difficulty, onCompletion, onGameOver) {
   const [cards, setCards] = useState([]);
   const [clickedCards, setClickedCards] = useState(new Set());
   
+  const [isHandFlipping, setIsHandFlipping] = useState(false);
+  const ANIMATION_DURATION = 800;
+
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
 
@@ -32,28 +35,33 @@ function useBattleLogic(difficulty, onCompletion, onGameOver) {
   
   // game logic, behavior when card is clicked
   const handleCardClick = (cardId) => {
+    if (isHandFlipping) return;
+
     if (!clickedCards.has(cardId)) {
+      setScore(prevScore => prevScore + 1); // increment score
       setClickedCards(prevCards => {
         const newClickedCards = new Set(prevCards);
         newClickedCards.add(cardId);
         return newClickedCards;
       });
 
-      setScore(prevScore => prevScore + 1);
-
-      setCards(prevCards => {
-        const newShuffledCards = shuffleCards([...prevCards]);
-
-        return newShuffledCards;
-      });
-
     } else {
       setScore(0);
       setClickedCards(new Set());
     }
-  }
 
-  return { score, highScore, cards, handleCardClick};
+    setIsHandFlipping(true);
+    
+    setTimeout(() => {
+      setCards(prevCards => shuffleCards([...prevCards]));
+
+      setTimeout(() => {
+        setIsHandFlipping(false);
+      }, 10);
+    }, ANIMATION_DURATION);
+  };
+
+  return { score, highScore, cards, handleCardClick, isHandFlipping};
 }
 
 export default useBattleLogic;

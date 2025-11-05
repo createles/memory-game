@@ -1,7 +1,37 @@
 .card {
-  width: 150px;
-  height: 200px;
-  background-color: green;
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  perspective: 1000px;
+  cursor: pointer;
+  min-width: 0px;
+  border-radius: 8px;
+  aspect-ratio: 46 / 81;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  will-change: transform;
+}
+
+.card.isFlipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
 }
 
 .card img {
