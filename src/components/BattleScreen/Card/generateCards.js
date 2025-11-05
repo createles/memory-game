@@ -12,7 +12,7 @@ function generateCards(difficulty) {
       deckSize = 10;
       break;
     case "hard":
-      deckSize = 12;
+      deckSize = 14;
       break;
     default:
       deckSize = 6;
