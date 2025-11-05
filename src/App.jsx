@@ -8,10 +8,23 @@ import CompletionScreen from './components/CompletionScreen/CompletionScreen';
 function App() {
   const [currentScreen, setCurrentScreen] = useState('menu');
   const [difficulty, setDifficulty] = useState('');
+  const [theme, setTheme] = useState('blackGold');
 
   const startGame = useCallback(() => {
     setCurrentScreen('battle');
     console.log('game started');
+  }, []);
+
+  const handleThemeChange = useCallback(() => {
+    setTheme(prevTheme =>
+      prevTheme === 'blackGold' ? 'purpleChrome' : 'blackGold'
+    );
+    console.log('Theme changed.')
+  }, [])
+
+  const handleDifficultyChange = useCallback((newDifficulty) => {
+    setDifficulty(newDifficulty);
+    console.log(`Difficulty set to: ${newDifficulty}`);
   }, []);
 
   const showGameOver = useCallback(() => {
@@ -33,7 +46,8 @@ function App() {
     menu: (
       <MainMenuScreen
         onStartGame={startGame}
-        setDifficulty={setDifficulty}
+        onThemeChange={handleThemeChange}
+        onDifficultyChange={handleDifficultyChange}
       />
     ),
     battle: (
@@ -42,6 +56,7 @@ function App() {
         onReturnToMenu={returnToMenu}
         onCompletion={showCompletion}
         onGameOver={showGameOver}
+        theme={theme}
       />
     ),
     gameover: (
