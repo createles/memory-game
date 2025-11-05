@@ -9,9 +9,9 @@ function BattleScreen({difficulty, onReturnToMenu, onCompletion, onGameOver}) {
 
   return (
     <div className={styles['battle-screen']}>
-      <button type="button" onClick={onReturnToMenu}>go back</button>
+      <button type="button" id="back-button" onClick={onReturnToMenu}>go back</button>
       <div className={styles['card-area-container']}>
-        {cards.map(card => (
+        {cards.map((card, index) => (
           <Card 
           key={card.id} 
           id={card.id}
@@ -19,6 +19,7 @@ function BattleScreen({difficulty, onReturnToMenu, onCompletion, onGameOver}) {
           img={card.img} 
           handleCardClick={handleCardClick}
           isFlipping={isHandFlipping}
+          index={index}
           ></Card>
         ))}
       </div>

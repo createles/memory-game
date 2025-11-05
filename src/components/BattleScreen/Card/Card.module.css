@@ -7,6 +7,19 @@
   min-width: 0px;
   border-radius: 8px;
   aspect-ratio: 46 / 81;
+  background-color: transparent;
+  border-radius: 20px;
+  /* initial state */
+  opacity: 0;
+  transform: translateY(100px);
+  transition: transform 0.5s ease-out var(--deal-delay),
+              opacity 0.4s ease-out var(--deal-delay);
+}
+
+/* final state after dealing */
+.card.isDealt {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card-inner {
@@ -37,4 +50,5 @@
 .card img {
   width: 100%;
   image-rendering: pixelated;
+  filter: drop-shadow(0 1px 5px black);
 }
