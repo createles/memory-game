@@ -1,5 +1,7 @@
 .battle-screen {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100svw;
   height: 100svh;
   background-color: rgb(27, 11, 4);
@@ -7,19 +9,78 @@
 }
 
 #back-button {
+  width: 10%;
+  align-self: center;
+}
+
+.progress-bar-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.progress-bar {
+  width: 60%;
+  height: 50px;
+  border: 2px solid yellow;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0;
+  height: 100%;
+  background-color: rgba(0, 255, 255, 0.5);
+  transition: width 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+  /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,70 C30,110 70,30 100,70 L100,100 0,100 Z' fill='rgba(0, 255, 255, 0.5)'/%3E%3C/svg%3E");
+  background-position: 0 100%;
+  background-size: 200px 50px;
+  background-repeat: repeat-x;
+  animation: wave-animation 3s linear infinite; */
+}
+
+.progress-fill::before {
+  content: '';
+  width: 200%;
+  height: 200%;
+  top: -50;
+  right: -50%;
+  border-radius: 40%;
+  background-color: rgba(0, 255, 255, 0.5);
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
+  animation: wave 12s linear infinite;
+}
+
+.progress-fill::after {
+  content: '';
+  width: 204%;
+  height: 204%;
+  background-color: rgba(0, 255, 255, 0.8);
+  position: absolute;
+  top: -52%;
+  left: -50%;
+  border-radius: 40%;
+  animation: wave 12s linear infinite;
+  animation-delay: -3s;
 }
 
 .card-area-container {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  position: absolute;
-  bottom: 0px;
   width: 100%;
-  height: 40%;
   padding: 1.5rem;
   gap: 1rem;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
