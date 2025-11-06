@@ -46,6 +46,7 @@ function App() {
     menu: (
       <MainMenuScreen
         onStartGame={startGame}
+        theme={theme}
         onThemeChange={handleThemeChange}
         onDifficultyChange={handleDifficultyChange}
       />
