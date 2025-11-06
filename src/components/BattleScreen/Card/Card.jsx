@@ -3,7 +3,7 @@ import styles from "./Card.module.css"
 import cardBackBG from "/src/assets/black-gold-cards/card-back/cardBack.png"
 import cardBackPC from "/src/assets/purple-chrome-cards/cardBack/cardBack.png"
 
-function Card({id, name, img, handleCardClick, isFlipping, index, theme}) {
+function Card({id, name, img, handleCardClick, isFlipping, index, theme, lastSuccessId}) {
   const [isDealt, setIsDealt] = useState(false);
   const cardBack = theme === "blackGold" ? cardBackBG : cardBackPC;
 
@@ -20,7 +20,7 @@ function Card({id, name, img, handleCardClick, isFlipping, index, theme}) {
   };
 
   return (
-    <div id={id} className={`${styles["card"]} ${isFlipping ? styles["isFlipped"] : ''} ${isDealt ? styles["isDealt"] : ''}`} style={{ '--deal-delay': `${index * 50}ms`}} onClick={handleClick}>
+    <div id={id} className={`${lastSuccessId === id? styles["success-glow"] : ''} ${styles["card"]} ${isFlipping ? styles["isFlipped"] : ''} ${isDealt ? styles["isDealt"] : ''}`} style={{ '--deal-delay': `${index * 50}ms`}} onClick={handleClick}>
       <div className={styles["card-inner"]}>
         <div className={styles["card-front"]}>
           <img src={`${img}`} alt={name}/>

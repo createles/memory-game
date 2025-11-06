@@ -3,7 +3,7 @@ import styles from "./MainMenuScreen.module.css"
 function MainMenuScreen({onStartGame, onThemeChange, onDifficultyChange}) {
   return (
     <div className={styles["main-menu"]}>
-      <div className={styles["main-title"]}>Game title</div>
+      <div className={styles["main-title"]}>Fortune Favors</div>
       <div className={styles["game-modes"]}>
         <button type="button" className={styles["easy-mode"]} onClick={() => onDifficultyChange("easy")}>Easy</button>
         <button type="button" className={styles["medium-mode"]} onClick={() => onDifficultyChange("medium")}>Medium</button>
