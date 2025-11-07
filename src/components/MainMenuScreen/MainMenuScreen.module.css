@@ -17,3 +17,16 @@
   display: flex;
   gap: 1rem;
 }
+
+.card-sample {
+  width: 100px;
+  image-rendering: pixelated;
+}
+
+.mode-items {
+
+}
+
+.menu-time {
+  font-size: 1rem;
+}

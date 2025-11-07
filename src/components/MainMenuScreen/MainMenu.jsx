@@ -3,19 +3,28 @@ import styles from "./MainMenuScreen.module.css"
 import cardSampleBG from "/src/assets/black-gold-cards/theFool.png"
 import cardSamplePC from "/src/assets/purple-chrome-cards/theFool.png"
 
-function MainMenuScreen({onStartGame, theme, onThemeChange, onDifficultyChange}) {
+function MainMenuScreen({onStartGame, theme, onThemeChange, onDifficultyChange, records}) {
   const cardSample = theme === "blackGold" ? cardSampleBG : cardSamplePC;
   
   return (
     <div className={styles["main-menu"]}>
       <div className={styles["main-title"]}>Fortune Favors</div>
       <div className={styles["game-modes"]}>
-        <button type="button" className={styles["easy-mode"]} onClick={() => onDifficultyChange("easy")}>Easy</button>
-        <button type="button" className={styles["medium-mode"]} onClick={() => onDifficultyChange("medium")}>Medium</button>
-        <button type="button" className={styles["hard-mode"]} onClick={() => onDifficultyChange("hard")}>Hard</button>
+        <div className={styles["mode-items"]}>
+          <button type="button" className={styles["easy-mode"]} onClick={() => onDifficultyChange("easy")}>Easy</button>
+          <p className={styles["menu-time"]}>{records["easy"] === null ? "0:00" : records["easy"]}</p>
+        </div>
+        <div className={styles["mode-items"]}>
+          <button type="button" className={styles["medium-mode"]} onClick={() => onDifficultyChange("medium")}>Medium</button>
+          <p className={styles["menu-time"]}>{records["medium"] === null ? "0:00" : records["medium"]}</p>
+          </div>
+        <div className={styles["mode-items"]}>
+          <button type="button" className={styles["hard-mode"]} onClick={() => onDifficultyChange("hard")}>Hard</button>
+          <p className={styles["menu-time"]}>{records["hard"] === null ? "0:00" : records["hard"]}</p>
+          </div>
       </div>
       <button className={styles["start-btn"]} onClick={onStartGame}> start </button>
-      <img src={cardSample} alt="cardSample" />
+      <img className={styles["card-sample"]} src={cardSample} alt="cardSample" />
       <button className={styles["theme-btn"]} onClick={onThemeChange}> change theme </button>
     </div>
   )

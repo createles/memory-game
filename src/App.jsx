@@ -2,13 +2,14 @@ import {useCallback, useState } from 'react'
 import BattleScreen from './components/BattleScreen/BattleScreen'
 import MainMenuScreen from './components/MainMenuScreen/MainMenu'
 import './App.css'
-import GameOverScreen from './components/GameOverScreen/GameOverScreen';
-import CompletionScreen from './components/CompletionScreen/CompletionScreen';
+import useRecordStorage from './components/useRecordStorage';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('menu');
   const [difficulty, setDifficulty] = useState('');
   const [theme, setTheme] = useState('blackGold');
+
+  const { records, updateRecord } = useRecordStorage();
 
   const startGame = useCallback(() => {
     setCurrentScreen('battle');
@@ -27,16 +28,6 @@ function App() {
     console.log(`Difficulty set to: ${newDifficulty}`);
   }, []);
 
-  const showGameOver = useCallback(() => {
-    setCurrentScreen('gameover');
-    console.log("game over");
-  }, []);
-
-  const showCompletion = useCallback(() => {
-    setCurrentScreen('completion');
-    console.log('you made it!');
-  }, []);
-
   const returnToMenu = useCallback(() => {
     setCurrentScreen('menu');
     console.log('returning to main menu');
@@ -49,23 +40,15 @@ function App() {
         theme={theme}
         onThemeChange={handleThemeChange}
         onDifficultyChange={handleDifficultyChange}
+        records={records}
       />
     ),
     battle: (
       <BattleScreen
         difficulty={difficulty}
         onReturnToMenu={returnToMenu}
-        onCompletion={showCompletion}
-        onGameOver={showGameOver}
         theme={theme}
-      />
-    ),
-    gameover: (
-      <GameOverScreen
-      />
-    ),
-    completion: (
-      <CompletionScreen
+        records={records}
       />
     ),
   };
