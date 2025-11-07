@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 function BattleScreen({difficulty, onReturnToMenu, onCompletion, onGameOver, theme}) {
   const [lastSuccessId, setlastSuccessId] = useState(null);
+  const [gameTime, setGameTime] = useState(0);
 
   // useBattleLogic is called on mount, and passes difficulty
   const { progress, maxProgress, cards, handleCardClick, isHandFlipping } = useBattleLogic(difficulty, onCompletion, onGameOver, theme, setlastSuccessId);
@@ -16,6 +17,10 @@ function BattleScreen({difficulty, onReturnToMenu, onCompletion, onGameOver, the
         <div className={styles["progress-bar"]}>
           <div className={styles["progress-fill"]} style={{width: `${(progress / maxProgress) * 100}%`}}></div>
         </div>
+      </div>
+      <div className={styles["timer-box"]}>
+        <p className={styles["running-time"]}></p>
+        <p className={styles["best-time"]}></p>
       </div>
       <div className={styles['card-area-container']}>
         {cards.map((card, index) => (
@@ -31,6 +36,9 @@ function BattleScreen({difficulty, onReturnToMenu, onCompletion, onGameOver, the
           lastSuccessId={lastSuccessId}
           ></Card>
         ))}
+      </div>
+      <div className={styles["completion-screen-bg"]}>
+        <div className={styles["completion-modal"]}></div>
       </div>
     </div>
   )
