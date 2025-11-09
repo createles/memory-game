@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import generateCards from "./Card/generateCards";
 import shuffleCards from "./shuffleCards";
 
-function useBattleLogic(difficulty, onCompletion, onGameOver, theme, setLastSuccessId) {
+function useBattleLogic(difficulty, theme, setLastSuccessId, handleGameCompletion) {
   const [cards, setCards] = useState([]);
   const [clickedCards, setClickedCards] = useState(new Set());
   
@@ -12,6 +12,12 @@ function useBattleLogic(difficulty, onCompletion, onGameOver, theme, setLastSucc
   const [progress, setProgress] = useState(0);
   const [maxProgress, setMaxProgress] = useState(0);
 
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(true);
+
+  const isInitialProgressMount = useRef(true);
+  const isInitialClickedMount = useRef(true);
+
   // runs on mounting; cards generated based on difficulty selected,
   // changes as difficulty increases
   useEffect(() => {
@@ -20,19 +26,48 @@ function useBattleLogic(difficulty, onCompletion, onGameOver, theme, setLastSucc
     setMaxProgress(newCards.length);
   }, [difficulty, theme]);
 
+  // starts timer on mount
   useEffect(() => {
-    console.log('Progress updated: ', progress);
+    let intervalId = null;
+
+    if(isTimerRunning) {
+      intervalId = setInterval(() => {
+        setTimeElapsed(prevTime => prevTime + 1);
+      }, 1000);
+    }
+
+    // clean-up function on unmount
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [isTimerRunning]);
+
+  useEffect(() => {
+    if (isInitialProgressMount.current) {
+      isInitialProgressMount.current = false;
+    } else {
+      console.log('Progress updated: ', progress);
+    }
   }, [progress]);
 
   useEffect(() => {
-    console.log('Clicked cards updated: ', clickedCards);
+    if (isInitialClickedMount.current) {
+      isInitialClickedMount.current = false;
+    } else {
+      console.log('Clicked cards updated: ', clickedCards);
+    }
+  }, [clickedCards]);
 
+  useEffect(() => {
     if (cards.length === 0 ) return;
 
     if (clickedCards.size === cards.length) {
-      onCompletion();
+      setIsTimerRunning(false);
+      handleGameCompletion(timeElapsed);
     }
-  }, [clickedCards, cards, onCompletion]);
+  }, [clickedCards, cards]);
   
   // game logic, behavior when card is clicked
   const handleCardClick = (cardId) => {
@@ -83,7 +118,7 @@ function useBattleLogic(difficulty, onCompletion, onGameOver, theme, setLastSucc
     }
   };
 
-  return { progress, maxProgress, cards, handleCardClick, isHandFlipping};
+  return { progress, maxProgress, cards, handleCardClick, isHandFlipping, timeElapsed};
 }
 
 export default useBattleLogic;

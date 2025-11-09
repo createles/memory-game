@@ -100,10 +100,8 @@
   position: absolute;
 }
 
-.completion-modal {
-  width: 50%;
-  height: 50%;
-  background-color: black;
+.completion-screen-bg.show {
+  display: flex;
 }
 
 @keyframes wave {

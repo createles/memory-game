@@ -49,6 +49,7 @@ function App() {
         onReturnToMenu={returnToMenu}
         theme={theme}
         records={records}
+        updateRecord={updateRecord}
       />
     ),
   };

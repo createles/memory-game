@@ -1,0 +1,9 @@
+.completion-modal {
+    width: 50%;
+    height: 50%;
+    background-color: seashell;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
