@@ -39,6 +39,7 @@ function App() {
         onStartGame={startGame}
         theme={theme}
         onThemeChange={handleThemeChange}
+        difficulty={difficulty}
         onDifficultyChange={handleDifficultyChange}
         records={records}
       />

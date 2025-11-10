@@ -30,3 +30,52 @@
 .menu-time {
   font-size: 1rem;
 }
+
+.easy-mode,
+.medium-mode,
+.hard-mode {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #000000; 
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.selected {
+  background-color: #555;
+}
+
+.selected::before {
+  content: '';
+  position: absolute;
+  background: conic-gradient(
+    from 0deg,
+    #00ffc8,
+    #00f0ff,
+    #a200ff,
+    #ff00a0,
+    #00ffc8 
+  );
+  animation: spin 3s linear infinite;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  filter: blur(8px);
+  z-index: -1;
+  border-radius: 8px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
