@@ -1,8 +1,9 @@
 import styles from "./BattleScreen.module.css"
 import useBattleLogic from "./useBattleLogic";
 import Card from "./Card/Card";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import CompletionModal from "./CompletionModal";
+import formatTime from "../formatTime";
 
 function BattleScreen({difficulty, onReturnToMenu, theme, records, updateRecord}) {
   const [lastSuccessId, setlastSuccessId] = useState(null);
@@ -11,11 +12,16 @@ function BattleScreen({difficulty, onReturnToMenu, theme, records, updateRecord}
 
   const bestTime = records[difficulty];
 
-  const handleGameCompletion = (time) => {
+  const handleGameCompletion = useCallback((time) => {
     updateRecord(difficulty, time);
     setFinalTime(time);
     setShowCompletionModal(true);
-  };
+  }, [
+    updateRecord,
+    difficulty,
+    setFinalTime,
+    setShowCompletionModal
+  ]);
 
   // useBattleLogic is called on mount, and passes difficulty
   const { progress, maxProgress, cards, handleCardClick, isHandFlipping, timeElapsed } = useBattleLogic(difficulty, theme, setlastSuccessId, handleGameCompletion);
@@ -29,8 +35,8 @@ function BattleScreen({difficulty, onReturnToMenu, theme, records, updateRecord}
         </div>
       </div>
       <div className={styles["timer-box"]}>
-        <p className={styles["running-time"]}>{timeElapsed}</p>
-        <p className={styles["best-time"]}>{bestTime}</p>
+        <p className={styles["running-time"]}> Current time: {formatTime(timeElapsed)}</p>
+        <p className={styles["best-time"]}>Best time: {formatTime(bestTime)}</p>
       </div>
       <div className={styles['card-area-container']}>
         {cards.map((card, index) => (
@@ -49,8 +55,8 @@ function BattleScreen({difficulty, onReturnToMenu, theme, records, updateRecord}
       </div>
       <div className={`${styles["completion-screen-bg"]} ${showCompletionModal ? styles["show"] : ''}`}>
         <CompletionModal
-          time={finalTime}
-          record={bestTime}
+          time={formatTime(finalTime)}
+          record={formatTime(bestTime)}
           onClose={onReturnToMenu}
         />
       </div>

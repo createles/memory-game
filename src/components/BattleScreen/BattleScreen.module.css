@@ -78,7 +78,15 @@
 }
 
 .timer-box {
-
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: white;
 }
 
 .running-time {
