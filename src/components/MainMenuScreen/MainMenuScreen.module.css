@@ -5,48 +5,34 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #333;
-  color: whitesmoke;
-  gap: 1rem;
+  background-color: var(--color-bg);
+  gap: 1.5rem;
+  padding: 1rem;
 }
 
 .main-title {
-  font-size: 5rem;
+  font-family: var(--font-display);
+  /* Use clamp() for responsive font size */
+  font-size: clamp(3rem, 10vw, 5rem);
+  color: var(--color-primary);
+  text-shadow: 0 0 10px var(--color-accent);
 }
 
 .instructions {
-
+  text-align: center;
+  max-width: 500px;
+  font-size: 1.1rem;
+  color: var(--color-text);
 }
 
 .under-txt {
   text-decoration: underline;
+  color: var(--color-primary);
 }
 
 .game-modes {
   display: flex;
-  gap: 1rem;
-}
-
-.card-container {
-  width: 10%;
-  height: auto;
-  padding: 0.2rem;
-  border: 2px solid transparent;
-  border-radius: 20px;
-  background: linear-gradient(black, black) padding-box,
-    conic-gradient(from var(--angle, 0),
-      transparent,
-      white 10%,
-      transparent 30%,
-      white 50%
-      ) border-box;
-  animation: spin-gradient 10s linear infinite;
-}
-
-.card-sample {
-  width: 100%;
-  height: 100%;
-  image-rendering: pixelated;
+  gap: 1.5rem;
 }
 
 .mode-items {
@@ -57,46 +43,89 @@
 }
 
 .menu-time {
-  font-size: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--color-accent);
 }
 
+/* Base button styles are in index.css */
+/* We just add positioning and overflow here */
 .easy-mode,
 .medium-mode,
 .hard-mode {
   position: relative;
-  padding: 1rem 2rem;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background: #000000;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  z-index: 1;
-  overflow: hidden;
+  overflow: hidden; /* Clips the sheen */
+  width: 150px;
 }
 
+.card-container {
+  /* Removed the old gradient border */
+  width: 100px;
+  height: auto;
+  border: 2px solid var(--color-primary);
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 0 15px var(--color-primary);
+}
+
+.card-sample {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  display: block; /* Fixes small gap */
+}
+
+/*
+ * ⭐ NEW "SELECTED" EFFECT (Face Sheen) ⭐
+ * This replaces the border glow
+*/
 .selected {
-  background: linear-gradient(black, black) padding-box,
-    conic-gradient(
-    from var(--angle, 0), 
-    transparent, 
-    white 10%, 
-    transparent 20%
-    ) border-box;
-  animation: spin-gradient 3s linear infinite;
+  /* Make it stand out */
+  background-color: var(--color-bg);
+  box-shadow: 0 0 15px var(--color-primary);
+  color: var(--color-accent);
 }
 
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
+.selected::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-150%);
+  animation: sheen-wipe 2.5s linear infinite;
 }
 
-@keyframes spin-gradient {
-  from {
-    --angle: 0deg;
+@keyframes sheen-wipe {
+  from { transform: translateX(-150%); }
+  to { transform: translateX(250%); }
+}
+
+/* --- Mobile Styles --- */
+@media (max-width: 768px) {
+  .game-modes {
+    flex-direction: column;
+    gap: 1rem;
+    width: 80%;
   }
-  to {
-    --angle: 360deg;
+
+  .easy-mode,
+  .medium-mode,
+  .hard-mode {
+    width: 100%;
+  }
+
+  .card-container {
+    width: 80px;
   }
 }
+
+/* DELETE all old @property, @keyframes spin-gradient, */
+/* and .selected[::before] rules */

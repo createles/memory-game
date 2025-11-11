@@ -1,4 +1,4 @@
-import {useCallback, useState } from 'react'
+import {useCallback, useState, useEffect } from 'react'
 import BattleScreen from './components/BattleScreen/BattleScreen'
 import MainMenuScreen from './components/MainMenuScreen/MainMenu'
 import './App.css'
@@ -10,6 +10,10 @@ function App() {
   const [theme, setTheme] = useState('blackGold');
 
   const { records, updateRecord } = useRecordStorage();
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
 
   const startGame = useCallback(() => {
     setCurrentScreen('battle');

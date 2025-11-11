@@ -1,13 +1,37 @@
 .completion-modal {
-    width: 50%;
-    height: 50%;
-    background-color: seashell;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 500px;
+  max-width: 90%;
+  background-color: var(--color-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 0 20px var(--color-primary);
+  gap: 1rem;
 }
 
 .completion-msg {
-    
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.final-time,
+.best-time {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  color: var(--color-text);
+}
+
+.best-time {
+  color: var(--color-accent);
+}
+
+.return-btn {
+  /* This will inherit the base button styles from index.css */
+  margin-top: 1rem;
 }
