@@ -67,15 +67,15 @@ function useBattleLogic(difficulty, theme, setLastSuccessId, handleGameCompletio
       setIsTimerRunning(false);
       handleGameCompletion(timeElapsed);
     }
-  }, [clickedCards, cards]);
+  }, [clickedCards, cards, timeElapsed, handleGameCompletion]);
   
   // game logic, behavior when card is clicked
   const handleCardClick = (cardId) => {
     if (isHandFlipping) return;
 
     if (!clickedCards.has(cardId)) {
-      setProgress(prevProgress => prevProgress + 1); // increment progress
-      setClickedCards(prevCards => {
+      setProgress((prevProgress) => prevProgress + 1); // increment progress
+      setClickedCards((prevCards) => {
         const newClickedCards = new Set(prevCards);
         newClickedCards.add(cardId);
         return newClickedCards;
@@ -83,24 +83,23 @@ function useBattleLogic(difficulty, theme, setLastSuccessId, handleGameCompletio
 
       // trigger glow
       setLastSuccessId(cardId);
+      // start flip animation
+      setIsHandFlipping(true);
 
-      // wait for glow to finish
+      // remove glow before un-flip
       setTimeout(() => {
-        // reset state for glow
-        setLastSuccessId(null);
-      
-        // start flip animation
-        setIsHandFlipping(true);
-        // start shuffle animation after a delay
+        setLastSuccessId(null)
+      }, 600);
+
+      // flip back after shuffle
+      setTimeout(() => {
+        setCards((prevCards) => shuffleCards([...prevCards]));
+
+        // reset flip state a short bit after shuffle
         setTimeout(() => {
-          setCards(prevCards => shuffleCards([...prevCards]));
-          
-          // reset flip state a short bit after shuffle
-          setTimeout(() => {
-            setIsHandFlipping(false);
-          }, 10)
-        }, ANIMATION_DURATION)
-      }, 700);
+          setIsHandFlipping(false);
+        }, 10);
+      }, ANIMATION_DURATION);
 
     } else {
       setProgress(0);

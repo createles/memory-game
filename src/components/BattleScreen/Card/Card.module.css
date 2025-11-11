@@ -56,24 +56,24 @@
 }
 
 .success-glow {
-  animation: success-glow 0.7s ease-in-out;
+  animation: success-glow 1s ease-out;
 }
 
 .fail-glow {
-  animation: fail-glow 0.7s ease-in-out;
+  animation: fail-glow 1s ease-in-out;
 }
 
 @keyframes success-glow {
   0% {
-    filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.00));
+    filter: drop-shadow(0 0 6px rgba(0, 255, 0, 0.00));
   }
 
-  50% {
-    filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.80));
+  10% {
+    filter: drop-shadow(0 0 6px rgba(0, 255, 0, 0.80));
   }
 
   100% {
-    filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.00));
+    filter: drop-shadow(0 0 6px rgba(0, 255, 0, 0.00));
   }
 }
 
