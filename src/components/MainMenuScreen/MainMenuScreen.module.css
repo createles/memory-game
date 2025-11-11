@@ -7,10 +7,19 @@
   align-items: center;
   background-color: #333;
   color: whitesmoke;
+  gap: 1rem;
 }
 
 .main-title {
   font-size: 5rem;
+}
+
+.instructions {
+
+}
+
+.under-txt {
+  text-decoration: underline;
 }
 
 .game-modes {
@@ -18,13 +27,33 @@
   gap: 1rem;
 }
 
+.card-container {
+  width: 10%;
+  height: auto;
+  padding: 0.2rem;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background: linear-gradient(black, black) padding-box,
+    conic-gradient(from var(--angle, 0),
+      transparent,
+      white 10%,
+      transparent 30%,
+      white 50%
+      ) border-box;
+  animation: spin-gradient 10s linear infinite;
+}
+
 .card-sample {
-  width: 100px;
+  width: 100%;
+  height: 100%;
   image-rendering: pixelated;
 }
 
 .mode-items {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .menu-time {
@@ -35,10 +64,10 @@
 .medium-mode,
 .hard-mode {
   position: relative;
-  padding: 0.75rem 1.5rem;
-  border: none;
+  padding: 1rem 2rem;
+  border: 2px solid transparent;
   border-radius: 8px;
-  background-color: #000000; 
+  background: #000000;
   color: white;
   font-size: 1rem;
   cursor: pointer;
@@ -47,35 +76,27 @@
 }
 
 .selected {
-  background-color: #555;
+  background: linear-gradient(black, black) padding-box,
+    conic-gradient(
+    from var(--angle, 0), 
+    transparent, 
+    white 10%, 
+    transparent 20%
+    ) border-box;
+  animation: spin-gradient 3s linear infinite;
 }
 
-.selected::before {
-  content: '';
-  position: absolute;
-  background: conic-gradient(
-    from 0deg,
-    #00ffc8,
-    #00f0ff,
-    #a200ff,
-    #ff00a0,
-    #00ffc8 
-  );
-  animation: spin 3s linear infinite;
-  top: -4px;
-  left: -4px;
-  width: calc(100% + 8px);
-  height: calc(100% + 8px);
-  filter: blur(8px);
-  z-index: -1;
-  border-radius: 8px;
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }
 
-@keyframes spin {
+@keyframes spin-gradient {
   from {
-    transform: rotate(0deg);
+    --angle: 0deg;
   }
   to {
-    transform: rotate(360deg);
+    --angle: 360deg;
   }
 }

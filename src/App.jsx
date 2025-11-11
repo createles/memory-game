@@ -6,7 +6,7 @@ import useRecordStorage from './components/useRecordStorage';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('menu');
-  const [difficulty, setDifficulty] = useState('');
+  const [difficulty, setDifficulty] = useState('easy');
   const [theme, setTheme] = useState('blackGold');
 
   const { records, updateRecord } = useRecordStorage();
