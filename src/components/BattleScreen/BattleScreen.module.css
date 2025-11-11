@@ -13,7 +13,7 @@
 #back-button {
   width: 150px;
   align-self: center;
-  position: absolute;
+  position: absolute; /* Position on top-left of screen */
   top: 1.5rem;
   left: 1.5rem;
   z-index: 10;
@@ -23,7 +23,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 1rem; /* Add left and right spacing */
 }
 
 .progress-bar {
@@ -35,7 +35,7 @@
   background-color: var(--color-secondary);
 }
 
-/* ⭐ NEW PROGRESS FILL ⭐ */
+/* Replace old fill animation with glow */
 .progress-fill {
   width: 0;
   height: 100%;
@@ -46,8 +46,6 @@
               inset 0 0 5px var(--color-accent);
   animation: pulse-glow 2s ease-in-out infinite;
 }
-
-/* Remove old .progress-fill::before, ::after, and @keyframes wave */
 
 @keyframes pulse-glow {
   0% { box-shadow: 0 0 10px var(--color-primary), inset 0 0 5px var(--color-accent); }
@@ -62,7 +60,7 @@
   justify-content: center;
   width: 100%;
   padding: 1.5rem;
-  gap: 1.5rem; /* More space */
+  gap: 1.5rem; /* Add more space between cards as default */
   overflow-y: auto; /* Allow scrolling on small screens */
   flex-grow: 1; /* Allow container to fill space */
 }
@@ -87,7 +85,7 @@
 
 .best-time {
   color: var(--color-accent);
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* Smaller text under current time*/
 }
 
 /* --- Modal Styles --- */

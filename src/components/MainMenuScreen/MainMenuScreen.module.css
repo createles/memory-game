@@ -48,8 +48,9 @@
   color: var(--color-accent);
 }
 
-/* Base button styles are in index.css */
-/* We just add positioning and overflow here */
+ /* Move base button styles to index.css
+  add overflow and position styles
+ */
 .easy-mode,
 .medium-mode,
 .hard-mode {
@@ -59,7 +60,6 @@
 }
 
 .card-container {
-  /* Removed the old gradient border */
   width: 100px;
   height: auto;
   border: 2px solid var(--color-primary);
@@ -72,15 +72,11 @@
   width: 100%;
   height: 100%;
   image-rendering: pixelated;
-  display: block; /* Fixes small gap */
+  display: block; 
 }
 
-/*
- * ⭐ NEW "SELECTED" EFFECT (Face Sheen) ⭐
- * This replaces the border glow
-*/
+
 .selected {
-  /* Make it stand out */
   background-color: var(--color-bg);
   box-shadow: 0 0 15px var(--color-primary);
   color: var(--color-accent);
@@ -89,17 +85,23 @@
 .selected::after {
   content: '';
   position: absolute;
-  top: 0;
+  top: -50%;
   left: 0;
-  width: 50%;
-  height: 100%;
+  /* Set bigger than button */
+  width: 400%;
+  height: 200%;
+  border-radius: 60%;
   background: linear-gradient(
     45deg,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.3) 50%,
+    var(--color-primary) 50%,
     rgba(255, 255, 255, 0) 100%
   );
   transform: translateX(-150%);
+  /* Add blur to sheen */
+  filter: blur(10px);
+  /* Smoothen out with less opacity */
+  opacity: 40%;
   animation: sheen-wipe 2.5s linear infinite;
 }
 
@@ -126,6 +128,3 @@
     width: 80px;
   }
 }
-
-/* DELETE all old @property, @keyframes spin-gradient, */
-/* and .selected[::before] rules */

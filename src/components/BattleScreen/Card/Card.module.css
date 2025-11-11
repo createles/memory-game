@@ -75,22 +75,21 @@
   animation: fail-glow 1s ease-in-out;
 }
 
-/* ⭐ CORRECTED GLOW KEYFRAMES ⭐ */
+
 @keyframes success-glow {
   0% {
-    /* Always include the base shadow! */
+    /* include base shadow */
     filter: drop-shadow(0 1px 5px black)
             drop-shadow(0 0 6px rgba(0, 255, 0, 0.00));
   }
 
   10% {
-    /* And include it here, using our theme variable */
+    /* Use theme color for success */
     filter: drop-shadow(0 1px 5px black)
             drop-shadow(0 0 10px var(--color-success));
   }
 
   100% {
-    /* And here */
     filter: drop-shadow(0 1px 5px black)
             drop-shadow(0 0 6px rgba(0, 255, 0, 0.00));
   }
@@ -113,7 +112,7 @@
   }
 }
 
-/* Added mobile styles for cards */
+/* Mobile styles for cards */
 @media (max-width: 768px) {
   .card {
     width: 80px; /* Smaller cards on mobile */
